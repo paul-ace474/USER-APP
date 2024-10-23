@@ -8,14 +8,16 @@ const createUser = (req, res) => {
     .json({ msg: `User Created Successfully`, data: result });
 };
 
-const findAllUsers = (req, res) => {
+const findAllUsers = async (req, res) => {
   const data = req.body;
-  const details = userService.findAllUsers(data);
+  const details = await userService.findAllUsers(data);
   if (details.length < 1) {
-    return res.json({ msg: `No users found`, data: details });
+    return res.json({ msg: `No users found`,  data });
   }
-  return res.status(200).json({ msg: `User found`, data: details });
+  return res.status(200).json({ msg: `User found`,  data: details});
 };
+
+
 
 const findById = async (req, res) => {
   const id = req.params.id;
